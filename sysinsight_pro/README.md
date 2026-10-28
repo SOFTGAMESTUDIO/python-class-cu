@@ -12,6 +12,8 @@ SysInsight Pro is a Python-based system diagnostics, health scoring, benchmarkin
 - Local AI integration hooks for Ollama-compatible analysis
 - SQLite-backed snapshot storage
 - Tkinter desktop dashboard with automatic metric refresh
+- Clickable sidebar pages for Dashboard, Hardware, Performance, Diagnostics, and Settings
+- Bounded, cancellable CPU performance test with a current-load risk check
 
 ## Project structure
 
@@ -60,12 +62,12 @@ sysinsight_pro/
 │   │   ├── recommendations.py
 │   │   ├── startup.py
 │   │   └── temp_cleanup.py
-    └── ui/
-        ├── benchmark.py
-        ├── dashboard.py
-        ├── diagnostics.py
-        ├── gpu.py
-        └── reports.py
+│   └── ui/
+│       ├── benchmark.py
+│       ├── dashboard.py
+│       ├── diagnostics.py
+│       ├── gpu.py
+│       └── reports.py
 ```
 
 ## Quick start
@@ -78,7 +80,11 @@ pip install -r requirements.txt
 python main.py
 ```
 
-On Windows, run `python main.py` from the project folder to open the desktop window. The dashboard refreshes system readings every two seconds; use **Refresh** to request an immediate scan.
+On Windows, run `python main.py` from the project folder to open the desktop window. Use the clickable left sidebar to switch pages. The dashboard refreshes system readings every two seconds by default; change the interval on **Settings**.
+
+The **Hardware** page displays the latest collected device readings. **Diagnostics** checks telemetry availability and current usage; these checks do not certify hardware health. **Performance** includes the bounded CPU benchmark and current risk summary.
+
+The CPU performance test is a short, single-threaded synthetic benchmark with a maximum duration of 15 seconds and a Stop button. It is not a multi-core benchmark or a hardware stability test. Tests are blocked when CPU load, memory use, or a reported CPU temperature is already high. If the operating system does not expose CPU temperature sensors, the app warns that thermal monitoring is unavailable before asking for confirmation; automatic temperature cut-off can only work when a CPU sensor is exposed.
 
 ## Notes
 

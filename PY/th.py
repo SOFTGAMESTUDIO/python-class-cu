@@ -1,7 +1,6 @@
 import tkinter as tk
 
 root = tk.Tk()
-root.iconbitmap(r'logo.png')
 root.title("My Tkinter App")
 root.geometry("400x400")
 
